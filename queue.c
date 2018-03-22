@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "queue.h"
+
 #define MAXQUEUE 100
 
 struct _Queue {
