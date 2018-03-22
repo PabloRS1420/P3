@@ -22,6 +22,7 @@ elementos de la cola.
 ------------------------------------------------------------------
 */
 Queue* queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_function_type f2, print_elementqueue_function_type f3) {
+    Queue *q = NULL
 
 /**
 ------------------------------------------------------------------
