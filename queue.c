@@ -1,4 +1,4 @@
-
+#define MAXQUEUE 100
 
 struct _Queue {
     void **head;
@@ -11,9 +11,9 @@ struct _Queue {
 
 /**
 ------------------------------------------------------------------
-Inicializa la cola: reserva memoria para ella e inicializa
-todos sus elementos. Es importante que no se reserve memoria
-para los elementos de la cola.
+Inicializa la cola: reserva memoria para ella e inicializa todos
+sus elementos. Es importante que no se reserve memoria para los
+elementos de la cola.
 ------------------------------------------------------------------
 */
 Queue* queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_function_type f2, print_elementqueue_function_type f3) {
