@@ -1,6 +1,14 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "point.h"
+#include "stack_element.h"
+#include "element.h"
+#include "types.h"
+#include "queue.h"
+
 typedef enum { 
     RIGHT=0,  
     UP=1,  
@@ -21,6 +29,7 @@ Point * map_getNeighborPoint(const Map * map, const Point *p, const Move mov);
 Status map_setSize(Map *map, int row, int col);
 Status map_setPoint(Map *map, const Point *p);
 int map_print(FILE *f, const Map *map);
-Point deep_search(Map *map, Point *p);
+Point *deep_search_pila(Map *map, Point *p);
+Point *deep_search_cola(Map *map, Point *p);
 
 #endif
