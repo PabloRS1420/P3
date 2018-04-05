@@ -6,7 +6,7 @@ struct _Point{
     int x;
     int y;
     char symbol;
-    struct _Point * parent;
+    struct _Point *parent;
 };
 
 Point *point_ini(int x, int y, char s){
@@ -35,18 +35,21 @@ int point_getCoordinateX(const Point *p){
     if (p){
         return p->x;
     }
+    return -1;
 }
 
 int point_getCoordinateY(const Point *p){
     if (p){
         return p->y;
     }
+    return -1;
 }
 
 char point_getSymbol(const Point *p){
     if (p){
         return p->symbol;
     }
+    return NULL;
 }
 
 Bool point_isInput(Point *p){	
@@ -134,7 +137,7 @@ Bool point_equals(const Point *p1,const Point *p2){
     }
 }
 
-Point *point_copy(const Point *p) {
+Point *point_copy(const Point *p){
     if(!p){
         return NULL;
     }
@@ -144,6 +147,17 @@ Point *point_copy(const Point *p) {
     pcopy = point_ini(point_getCoordinateX(p),point_getCoordinateY(p),point_getSymbol(p));
     
     return pcopy;
+}
+
+Point *point_copy_all(const Point *p){
+    if(!p){
+        return NULL;
+    }
+    
+    Point *pcopy = NULL;
+    
+    pcopy = point_copy(p);
+    pcopy->parent = point_copy(p->parent);
 }
 
 int point_print(FILE *f, const Point *p){
