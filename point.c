@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "point.h"
-#include "types.h"
 
 struct _Point{
     int x;
     int y;
     char symbol;
+    struct _Point * parent;
 };
 
 Point *point_ini(int x, int y, char s){
-    if (x<0 || y<0 || (s != 'I' && s != 'o' && s != '+' && s != ' ')){
+    if (x<0 || y<0 || (s != 'I' || s != 'o' || s != '+' || s != ' ' || s != 'V')){
         return NULL;
     }
     
@@ -76,6 +76,15 @@ Bool point_isBarrier(Point *p) {
     }
 }
 
+Bool point_isVisited(Point *p) {
+    if (point_getSymbol(p)=='V'){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 Bool point_isSpace(Point *p){
     if (point_getSymbol(p) == ' '){
         return TRUE;
@@ -104,7 +113,7 @@ Status point_setCoordinateY(Point *p, const int y) {
 }
 
 Status point_setSymbol(Point *p, const char s){
-    if (s != 'I' || s != 'o' || s != '+' || s != ' '){
+    if (s != 'I' || s != 'o' || s != '+' || s != ' ' || s != 'V'){
         return ERROR;
     }
     p->symbol = s;
