@@ -10,7 +10,7 @@ struct _Point{
 };
 
 Point *point_ini(int x, int y, char s){
-    if (x<0 || y<0 || (s != 'I' || s != 'o' || s != '+' || s != ' ' || s != 'V')){
+    if (x<0 || y<0 || (s != 'I' && s != 'o' && s != '+' && s != ' ' && s != 'V')){
         return NULL;
     }
     
@@ -117,7 +117,7 @@ Status point_setCoordinateY(Point *p, const int y) {
 }
 
 Status point_setSymbol(Point *p, const char s){
-    if (s != 'I' || s != 'o' || s != '+' || s != ' ' || s != 'V'){
+    if (s != 'I' && s != 'o' && s != '+' && s != ' ' && s != 'V'){
         return ERROR;
     }
     p->symbol = s;
