@@ -149,17 +149,6 @@ Point *point_copy(const Point *p){
     return pcopy;
 }
 
-Point *point_copy_all(const Point *p){
-    if(!p){
-        return NULL;
-    }
-    
-    Point *pcopy = NULL;
-    
-    pcopy = point_copy(p);
-    pcopy->parent = point_copy(p->parent);
-}
-
 int point_print(FILE *f, const Point *p){
     return fprintf(f, "[(%d,%d): %c]\n", point_getCoordinateX(p), point_getCoordinateY(p), point_getSymbol(p));
 }
