@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "map.h"
-#include "point.h"
-#include "stack_element.h"
-#include "element.h"
-#include "types.h"
 
 typedef struct _Map {
     Point *point [4096] [4096];
@@ -127,7 +121,7 @@ int map_print(FILE *f, const Map *map){
     return fprintf(f, "Filas: %d, Columnas: %d", map_getNrows(map), map_getNcols(map));
 }
 
-Point deep_search(Map *map, Point *p){
+Point *deep_search_pila(Map *map, Point *p){
     Stack *s = stack_ini();
     int i;
     Point *p2 = point_ini(0, 0, +);
@@ -135,6 +129,27 @@ Point deep_search(Map *map, Point *p){
     stack_push(s, p);
     while(stack_isEmpty(s) != TRUE) {
         p2 = point_copy_all(stack_pop(s));
+        if(point_getSymbol(p2) != V) {
+            point_setSymbol(p2, V);
+            map_setPoint(m, p2);
+            for(i=0; i<5; i++){
+	        p3 = map_getNeighborPoint(map, p2, i);
+                if (point_isOutput(p3) == TRUE) return w;
+                if (point_isSpace(p3) == TRUE) stack_push(s, p3);
+            }
+        }
+    }
+	return NULL;
+}
+		   
+Point deep_search_cola(Map *map, Point *p){
+    Queue *q = queue_ini(, , );
+    int i;
+    Point *p2 = point_ini(0, 0, +);
+    Point *p3 = point_ini(0, 0, +);
+    queue_insert(q, p);
+    while(queue_isEmpty(q) != TRUE) {
+        p2 = point_copy_all(queue_extract(q));
         if(point_getSymbol(p2) != V) {
             point_setSymbol(p2, V);
             map_setPoint(m, p2);
@@ -148,3 +163,4 @@ Point deep_search(Map *map, Point *p){
     }
 	return NULL;
 }
+
