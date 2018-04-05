@@ -41,7 +41,8 @@ char point_getSymbol(const Point *);
 /* Funciones derivadas que indican el tipo de punto que tenemos */
 Bool point_isInput(Point *); 
 Bool point_isOutput(Point *);
-Bool point_isBarrier(Point *); 
+Bool point_isBarrier(Point *);
+Bool point_isVisited(Point *); 
 Bool point_isSpace(Point *);
 /* Modifica la coordenda X de un punto dado, devuelve ERROR si se produce algún error */
 Status point_setCoordinateX(Point *, const int);
