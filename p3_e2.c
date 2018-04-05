@@ -8,8 +8,8 @@ int main(int argc, char * argv[]){
     int nFil, nCol, i, j;
     char symbol;
     Stack *s = NULL;
-    Point *pAUX = point_ini()
-    Point *pOutput = point_ini();
+    Point *pAUX = point_ini(0, 0, +)
+    Point *pOutput = point_ini(0, 0, +);
     Map *map = map_ini();
     FILE *fp = fopen("argv[1]", "r+");
     fscanf(fp, "%d %d", &nFil, &nCol);
