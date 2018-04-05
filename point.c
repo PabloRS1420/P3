@@ -23,6 +23,7 @@ Point *point_ini(int x, int y, char s){
     p->x = x;
     p->y = y;
     p->symbol = s;
+    p->parent = NULL;
     
     return p;
 }
