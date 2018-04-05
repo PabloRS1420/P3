@@ -61,10 +61,10 @@ Point * map_getNeighborPoint(const Map * map, const Point *p, const Move mov){
     int x = point_getCoordinateX(p);
     int y = point_getCoordinateY(p);
 	
-    if(mov==0) return map->point[x][y+1];
-    else if(mov==1) return map->point[x+1][y];
-    else if(mov==2) return map->point[x][y-1];
-    else if(mov==3) return map->point[x-1][y];
+    if(mov=="RIGHT") return map->point[x][y+1];
+    else if(mov=="UP") return map->point[x+1][y];
+    else if(mov=="LEFT") return map->point[x][y-1];
+    else if(mov=="DOWN") return map->point[x-1][y];
     else return p;
 }
 			
@@ -134,14 +134,15 @@ Point deep_search(Map *map, Point *p){
     Point *p3 = point_ini(0, 0, +);
     stack_push(s, p);
     while(stack_isEmpty(s) != TRUE) {
-        p2 = stack_pop(s);
-        if(point_getSymbol(p2) != VISITED) {
-            point_setSymbol(p2, VISITED)
-            map_setPoint(m, p2)
+        p2 = point_copy_all(stack_pop(s));
+        if(point_getSymbol(p2) != V) {
+            point_setSymbol(p2, V);
+            map_setPoint(m, p2);
             for(i=0; i<5; i++){
-	            p3 = map_getNeighborPoint(map, p, i);
-                if point_isOutput(p3) == TRUE return w;
-                if point_isSpace(p3) == TRUE stack_push(s, w);
+	        p3 = map_getNeighborPoint(map, p2, i);
+		p3->parent = point_copy(p2);
+                if (point_isOutput(p3) == TRUE) return w;
+                if (point_isSpace(p3) == TRUE) stack_push(s, p3);
             }
         }
     }
