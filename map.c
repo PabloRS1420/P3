@@ -49,7 +49,7 @@ Point *map_getOutput(const Map *map){
     }
 }
 			   
-Point * map_getNeighborPoint(const Map * map, const Point *p, const Move mov){
+Point *map_getNeighborPoint(const Map *map, const Point *p, const Move mov){
     if(map==NULL||p==NULL||mov<0||mov>4) return NULL;
 	
     int x = point_getCoordinateX(p);
