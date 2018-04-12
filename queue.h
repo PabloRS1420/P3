@@ -1,6 +1,10 @@
 #indef QUEUE_H
 #define QUEUE_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
 typedef struct _Queue Queue;
 
 Queue *queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_function_type f2, print_elementqueue_function_type f3);
