@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "queue.h"
-
-#define MAXQUEUE 100
 
 struct _Queue {
     void **head;
@@ -64,12 +59,16 @@ Bool queue_isFull(const Queue* queue) {
     void **aux = NULL;
     if (queue == NULL) return NULL_BOOLEAN;
     
+    void **aux = ((Queue*)queue)->item;
+    
+    /**
     if (queue->end == queue->item+MAXQUEUE-1) {
-        aux = &(queue->item[0]);  
+        aux = queue->item; //pq->end = &(pq->item[0]) 
     } 
     else {
         aux = queue->end + 1;   
     }
+    */
     
     if (aux == queue->front) return TRUE;
     
@@ -89,10 +88,10 @@ Status queue_insert(Queue *q, const void* pElem) {
     aux = elemento_copiar(pElem);
     if (!aux) return ERROR;
 
-    *(q->head) = aux;
+    *(q->end) = aux;
     
     if (q->end == q->item+MAXQUEUE-1) {
-        q->end = &(q->item[0]);
+        q->end = q->item; //pq->end = &(pq->item[0])
     }
     else {
         q->end++;
@@ -116,7 +115,7 @@ void *queue_extract(Queue *q) {
     pElem = *(q->head);
     
     if (q->head == q->item+MAXQUEUE-1) {
-        q->head = &(q->item[0]);  //pq->front= &(pq->datos[0])
+        q->head = q->item; //pq->head = &(pq->item[0])
     }
     else {
         pq->head++;
