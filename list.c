@@ -28,6 +28,8 @@ Status list_insertLast(List* list, const void *elem){
 }
 
 Status list_insertInOrder(List *list, const void *pElem){
+    Si hay que insertarlo al principio, tratar aparte
+    Si no hay un elemento siguiente, tratar aparte
     Si el nodo actual es menor y el siguiente es mayor, se inserta
     Si los dos son menores, avanzas
     Si los dos son mayores, FALLO, no deberia pasar
