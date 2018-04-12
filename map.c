@@ -139,7 +139,7 @@ Point *deep_search_pila(Map *map, Point *p){
             }
         }
     }
-	return NULL;
+    return NULL;
 }
 		   
 Point deep_search_cola(Map *map, Point *p){
@@ -161,6 +161,6 @@ Point deep_search_cola(Map *map, Point *p){
             }
         }
     }
-	return NULL;
+    return NULL;
 }
 
