@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "element.h"
 #include "functions.h"
+#include "types.h"
 
 #define MAXQUEUE 100
 
