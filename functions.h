@@ -4,8 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "queue.h"
-#include "list.h"
 
 void destroy_element_function(void *e);
 void *copy_element_function(const void *e);
