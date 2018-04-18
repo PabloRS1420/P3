@@ -2,6 +2,7 @@
 #include "queue.h"
 #include "point.h"
 #include "map.h"
+#include "map_solver.h"
 #include "types.h"
 
 int main(int argc, char * argv[]){
