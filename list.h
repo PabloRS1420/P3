@@ -44,6 +44,9 @@ const void* list_get(const List* list, int i);
 /* Devuelve el tamaño de una lista. */
 int list_size(const List* list);
 
+/* Copia un elemento de la lista. */
+void *list_copy(const List* list, const void* pElem);
+
 /* Imprime una lista (cada elemento en una nueva línea) devolviendo el número de caracteres escritos. */
 int list_print(FILE *fd, const List* list);
 
