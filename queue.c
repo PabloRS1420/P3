@@ -12,8 +12,7 @@ struct _Queue {
 /**
 ------------------------------------------------------------------
 Inicializa la cola: reserva memoria para ella e inicializa todos
-sus elementos. Es importante que no se reserve memoria para los
-elementos de la cola.
+sus elementos.
 ------------------------------------------------------------------
 */
 Queue* queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_function_type f2, print_elementqueue_function_type f3) {
@@ -104,10 +103,7 @@ Status queue_insert(Queue *q, const void* pElem) {
 
 /**
 ------------------------------------------------------------------
-Extrae un elemento de la cola. Es importante destacarque la cola
-deja de apuntar a este elemento por lo que la gestión desu memoria
-debe ser coherente: devolver el puntero al elemento o devolver 
-una copia liberando el elemento en la cola.
+Extrae un elemento de la cola.
 ------------------------------------------------------------------
 */
 void *queue_extract(Queue *q) {
