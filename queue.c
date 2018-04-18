@@ -36,6 +36,8 @@ Libera la cola y todos sus elementos.
 ------------------------------------------------------------------
 */
 void queue_destroy(Queue *q) {
+    destroy_element_function((Queue *)q);
+}
 
 /**
 ------------------------------------------------------------------
@@ -83,7 +85,7 @@ copia del mismo, reservando memoria nueva para él.
 */
 Status queue_insert(Queue *q, const void* pElem) {
     Elemento *aux = NULL;
-    if (!q || !pElem || queue_isFull(q)) return ERROR;
+    if (!q || !pElem || queue_isFull(q) == TRUE) return ERROR;
 
     aux = elemento_copiar(pElem);
     if (!aux) return ERROR;
@@ -130,9 +132,19 @@ Devuelve el número de elementos de la cola.
 */
 int queue_size(const Queue *q) {
     if(!q) return NULL;
+    int x;
+    x = q->end - q->head;
+    return x;
+}    
     
-    
-
+/**
+------------------------------------------------------------------
+Copia un elemento de la cola.
+------------------------------------------------------------------
+*/
+void *queue_copy(const Queue *q) {
+    return copy_element_function(Queue *);
+}
 /**
 ------------------------------------------------------------------
 Imprime toda la cola (un elemento en cada línea), devolviendo el
@@ -140,5 +152,8 @@ número de caracteres escritos.
 ------------------------------------------------------------------
 */
 int queue_print(FILE *pf, const Queue *q) {
+    return print_element_function(Queue *);
+}
+    
 
 
