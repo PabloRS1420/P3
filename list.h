@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "functions.h"
+#include "types.h"
 
 /* Tipos de los punteros a función soportados por la lista */
 typedef void (*destroy_elementlist_function_type)(void*);
