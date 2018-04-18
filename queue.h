@@ -21,6 +21,7 @@ Bool queue_isFull(const Queue *queue);
 Status queue_insert(Queue *q, const void *pElem);
 void *queue_extract(Queue *q);
 int queue_size(const Queue *q);
+void *queue_copy(const Queue *q, const void* pElem);
 int queue_print(FILE *pf, const Queue *q);
 
 #endif QUEUE_H
