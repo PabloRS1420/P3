@@ -86,7 +86,7 @@ Status queue_insert(Queue *q, const void* pElem) {
     Elemento *aux = NULL;
     if (!q || !pElem || queue_isFull(q) == TRUE) return ERROR;
 
-    aux = elemento_copiar(pElem);
+    aux = element_copy(pElem);
     if (!aux) return ERROR;
 
     *(q->end) = aux;
