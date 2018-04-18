@@ -1,6 +1,11 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "types.h"
+
 typedef struct _Element Element;
 
 Element *element_ini();
