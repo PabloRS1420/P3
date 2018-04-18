@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "queue.h"
+#include "list.h"
 #include "types.h"
-#include "point.h"
 
 int main(int argc, char * argv[]){
     printf("> ./p3_e4 datos.txt ");
