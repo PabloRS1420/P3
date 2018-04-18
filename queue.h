@@ -9,6 +9,10 @@
 
 typedef struct _Queue Queue;
 
+typedef void (*destroy_elementqueue_function_type)(void*); 
+typedef void (*(*copy_elementqueue_function_type)(const void*)); 
+typedef int (*print_elementqueue_function_type)(FILE *, const void*); 
+
 Queue *queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_function_type f2, print_elementqueue_function_type f3);
 void queue_destroy(Queue *q);
 Bool queue_isEmpty(const Queue *q);
