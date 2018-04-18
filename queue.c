@@ -143,7 +143,7 @@ Copia un elemento de la cola.
 ------------------------------------------------------------------
 */
 void *queue_copy(const Queue *q) {
-    return copy_element_function(Queue *);
+    return copy_element_function((Queue *)q);
 }
 /**
 ------------------------------------------------------------------
@@ -152,7 +152,7 @@ número de caracteres escritos.
 ------------------------------------------------------------------
 */
 int queue_print(FILE *pf, const Queue *q) {
-    return print_element_function(Queue *);
+    return print_element_function(pf, (Queue *)q);
 }
     
 
