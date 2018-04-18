@@ -142,8 +142,8 @@ int queue_size(const Queue *q) {
 Copia un elemento de la cola.
 ------------------------------------------------------------------
 */
-void *queue_copy(const Queue *q) {
-    return copy_element_function((Queue *)q);
+void *queue_copy(const Queue *q, const void* pElem) {
+    return copy_element_function((void *)pElem);
 }
 /**
 ------------------------------------------------------------------
