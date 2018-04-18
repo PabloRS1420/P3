@@ -54,7 +54,7 @@ Status list_insertFirst(List* list, const void *elem) {
     Nodo n = nodo_crear();
     if(!n) return ERROR;
     
-    n->data = element_copy(e);
+    n->data = element_copy(elem);
     n->next = l->node;
     l->node = n;
     
@@ -75,7 +75,7 @@ Status list_insertLast(List* list, const void *elem) {
     for(n = l->node; n->next != NULL; n = n->next)
         
     n = n->next;
-    n->data = element_copy(e);
+    n->data = element_copy(elem);
     
     return OK;
 }
@@ -87,11 +87,37 @@ Inserta en orden en la lista realizando una copia del elemento.
 ------------------------------------------------------------------
 */
 Status list_insertInOrder(List *list, const void *pElem) {
+    /* 
     Si hay que insertarlo al principio, tratar aparte
     Si no hay un elemento siguiente, tratar aparte
     Si el nodo actual es menor y el siguiente es mayor, se inserta
     Si los dos son menores, avanzas
     Si los dos son mayores, FALLO, no deberia pasar
+    */
+    if(list_isEmpty(list) == TRUE) return list_insertFirst(list, elem);
+    
+    Nodo nAux = nodo_crear();
+    if(!n) return ERROR;
+    Nodo n = nodo_crear();
+    if(!n) return ERROR;
+    
+    for(nAux = l->node; nAux->next != NULL; nAux = nAux->next) {
+        if(cmp_elementlist_function((void *)nAux->data,(void *)pElem) < 0
+        && cmp_elementlist_function((void *)nAux->next->data,(void *)pElem) > 0) {
+            n->data = element_copy(pElem);
+            n->next = nAux->next;
+            nAux->next = n;
+            return OK;
+        }  
+        if(cmp_elementlist_function((void *)nAux->data,(void *)pElem) > 0
+        && cmp_elementlist_function((void *)nAux->next->data,(void *)pElem) > 0) {
+            return ERROR;
+        }
+    }
+    
+    n = nAux->next;
+    n->data = element_copy(elem);
+    return OK;
 }
 
 /* Extrae del principio de la lista realizando una copia del elemento almacenado en dicho nodo. */ 
