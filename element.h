@@ -17,4 +17,4 @@ Element *element_copy(const Element *e);
 Bool element_equals(const Element *e1, const Element *e2);
 int element_print(FILE *f, const Element *e);
 
-#endif ELEMENT_H
+#endif
