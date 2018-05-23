@@ -26,4 +26,4 @@ int queue_size(const Queue *q);
 void *queue_copy(const Queue *q, const void* pElem);
 int queue_print(FILE *pf, const Queue *q);
 
-#endif QUEUE_H
+#endif
