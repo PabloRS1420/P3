@@ -1,21 +1,21 @@
 #include "functions.h"
 
 void destroy_element_function(void *e) { 
-    free((int*)e); 
+    free((void*)e); 
 } 
  
 void *copy_element_function(const void *e) { 
     int * dst; 
     if (e == NULL) return NULL; 
-    dst = (int*)malloc(sizeof(int)); 
+    dst = (void*)malloc(sizeof(void)); 
     /*Copiamos el elemento*/ 
-    *(dst) = *((int*)e); 
+    *(dst) = *((void*)e); 
     return dst; 
 } 
  
 int print_element_function(FILE *f, const void *e) { 
     if (f != NULL && e != NULL) {
-        return fprintf(f, "[%d]"\n, *((int*)e)); 
+        return fprintf(f, "[%d]"\n, *((void*)e)); 
     }
     return -1; 
 }
