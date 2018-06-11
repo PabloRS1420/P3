@@ -13,6 +13,23 @@ struct _List {
     cmp_elementlist_function_type       cmp_element_function;
 };
 
+NodeList *nodo_crear() {
+    NodeList *pn = NULL; 
+    pn = (NodeList *) malloc(sizeof(NodeList)); 
+    if (!pn) return NULL;
+    
+    data(pn) = next(pn) = NULL;
+    return pn; 
+}
+
+void nodo_liberar(NodeList *pn) {
+    if (pn) {
+        free(pn->data);
+        free(pn);
+    }
+}
+
+
 /**
 ------------------------------------------------------------------
 Inicializa la lista reservando memoria e inicializa todos sus elementos. 
@@ -28,10 +45,10 @@ print_elementlist_function_type f3, cmp_elementlist_function_type f4) {
     if(!l->node) return NULL;
     
     l->node = NULL;
-    l.destroy_element_function = f1;
-    l.copy_element_function = f2;
-    l.print_element_function = f3;
-    l.cmp_element_function = f4;
+    l->destroy_element_function = f1;
+    l->copy_element_function = f2;
+    l->print_element_function = f3;
+    l->cmp_element_function = f4;
     
     return l;
 }
@@ -42,6 +59,12 @@ Libera la lista y todos sus elementos.
 ------------------------------------------------------------------
 */
 void list_free(List* list) {
+    Nodo n = nodo_crear();
+    if(!n) return ERROR;
+    while(list->node == NULL) {
+        for(n = list->node; n->next != NULL; n = n->next){}
+        nodo_liberar(n);
+    }
     destroy_element_function((List *)list);
 }
 
@@ -54,7 +77,7 @@ Status list_insertFirst(List* list, const void *elem) {
     Nodo n = nodo_crear();
     if(!n) return ERROR;
     
-    n->data = element_copy(elem);
+    n->data = copy_element_function((Void *)elem);
     n->next = l->node;
     l->node = n;
     
@@ -72,10 +95,10 @@ Status list_insertLast(List* list, const void *elem) {
     Nodo n = nodo_crear();
     if(!n) return ERROR;
     
-    for(n = l->node; n->next != NULL; n = n->next)
+    for(n = l->node; n->next != NULL; n = n->next){}
         
     n = n->next;
-    n->data = element_copy(elem);
+    n->data = copy_element_function((Void *)elem);
     
     return OK;
 }
@@ -104,7 +127,7 @@ Status list_insertInOrder(List *list, const void *pElem) {
     for(nAux = l->node; nAux->next != NULL; nAux = nAux->next) {
         if(cmp_elementlist_function((void *)nAux->data,(void *)pElem) < 0
         && cmp_elementlist_function((void *)nAux->next->data,(void *)pElem) > 0) {
-            n->data = element_copy(pElem);
+            n->data = copy_element_function((Void *)pElem);
             n->next = nAux->next;
             nAux->next = n;
             return OK;
@@ -116,7 +139,7 @@ Status list_insertInOrder(List *list, const void *pElem) {
     }
     
     n = nAux->next;
-    n->data = element_copy(elem);
+    n->data = copy_element_function((Void *)elem);
     return OK;
 }
 
@@ -127,11 +150,11 @@ void *list_extractFirst(List* list) {
     Nodo n = nodo_crear();
     if(!n) return ERROR;
     
-    Element *e = element_ini();
+    Void *e = NULL;
     if(!e) return ERROR;
     
     n = l->node;
-    e = element_copy(n->data);
+    e = copy_element_function((Void *)n->data);
     n->next = l->node;
     
     nodo_liberar(n);
@@ -147,11 +170,11 @@ Extrae del final de la lista realizando una copia del elemento almacenado en dic
 void *list_extractLast(List* list) {
     if(list_isEmpty(list) == TRUE) return NULL;
     
-    Element *e = element_ini();
+    Void *e = NULL;
     if(!e) return ERROR;
     
     if(l->node->next == NULL) {
-        e = element_copy(l->node->data);
+        e = copy_element_function((Void *)l->node->data);
         nodo_liberar(l->node);
         return e
     }
@@ -161,7 +184,7 @@ void *list_extractLast(List* list) {
         
         for(n = l->node; n->next != NULL; n = n->next)
         
-        e = element_copy(n->next->data);
+        e = copy_element_function((Void *)n->next->data);
         nodo_liberar(n->next);
         n->next = NULL;
         return e;
@@ -188,13 +211,13 @@ const void* list_get(const List* list, int i) {
     
     Nodo n = nodo_crear();
     if(!n) return ERROR;
-    Element *e = element_ini();
+    Void *e = NULL;
     if(!e) return ERROR;
     int x;
     
     for(n = l->node, x = 0; x < i; n = n->next, x++)
         
-    e = element_copy(n->data);
+    e = copy_element_function((Void *)n->data);
     return e;
 }
 
@@ -211,7 +234,7 @@ int list_size(const List* list) {
         if(!n) return ERROR;
         int x;
       
-        for(n = l->node, x = 1; n->next != NULL; n = n->next, x++)
+        for(n = l->node, x = 1; n->next != NULL; n = n->next, x++){}
         
         return x;
     }
