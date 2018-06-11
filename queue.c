@@ -22,9 +22,9 @@ Queue* queue_ini(destroy_elementqueue_function_type f1, copy_elementqueue_functi
     
     q->head = &(q->item[0]);
     q->end = &(q->item[0]);
-    q.destroy_elementqueue_function_type = f1;
-    q.copy_elementqueue_function_type = f2;
-    q.print_elementqueue_function_type = f3;
+    q->destroy_elementqueue_function_type = f1;
+    q->copy_elementqueue_function_type = f2;
+    q->print_elementqueue_function_type = f3;
     
     return q;
 }
@@ -35,6 +35,9 @@ Libera la cola y todos sus elementos.
 ------------------------------------------------------------------
 */
 void queue_destroy(Queue *q) {
+    while (queue_isEmpty == FALSE) {
+        free(q->item);
+    }
     destroy_element_function((Queue *)q);
 }
 
@@ -83,10 +86,10 @@ copia del mismo, reservando memoria nueva para él.
 ------------------------------------------------------------------
 */
 Status queue_insert(Queue *q, const void* pElem) {
-    Elemento *aux = NULL;
+    Void *aux = NULL;
     if (!q || !pElem || queue_isFull(q) == TRUE) return ERROR;
 
-    aux = element_copy(pElem);
+    aux = copy_element_function((Void *)pElem);
     if (!aux) return ERROR;
 
     *(q->end) = aux;
@@ -107,7 +110,7 @@ Extrae un elemento de la cola.
 ------------------------------------------------------------------
 */
 void *queue_extract(Queue *q) {
-    Elemento *pElem = NULL;
+    Void *pElem = NULL;
     if (!q || queue_isEmpty(q)) return NULL;
     
     pElem = *(q->head);
