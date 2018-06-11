@@ -61,7 +61,7 @@ Libera la lista y todos sus elementos.
 void list_free(List* list) {
     Nodo n = nodo_crear();
     if(!n) return ERROR;
-    while(list->node == NULL) {
+    while(list->node != NULL) {
         for(n = list->node; n->next != NULL; n = n->next){}
         nodo_liberar(n);
     }
